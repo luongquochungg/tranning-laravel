@@ -64,6 +64,33 @@
                                     </div>
                                 </div>
 
+                                 <!-- Mật khẩu -->
+                                 <div class="form-group mb-2">
+                                    <div class="row text-center">
+                                        <div class="col-md-4" style="">Like</div>
+                                        <div class="col-md-8" style="text-align: left;">
+                                            <input type="like" id="like" style="border: solid 1px; width: 215px;"
+                                                name="like" required>
+                                            @if ($errors->has('like'))
+                                            <span class="text-danger">{{ $errors->first('like') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <!-- Mật khẩu -->
+                                 <div class="form-group mb-2">
+                                    <div class="row text-center">
+                                        <div class="col-md-4" style="">github</div>
+                                        <div class="col-md-8" style="text-align: left;">
+                                            <input type="text" id="github" style="border: solid 1px; width: 215px;"
+                                                name="github" required>
+                                            @if ($errors->has('github'))
+                                            <span class="text-danger">{{ $errors->first('github') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- Button -->
                                 <div class="row">
                                     <div class="col-md-8" style="text-align: right; margin-top: 6px;">
