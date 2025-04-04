@@ -61,19 +61,8 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'phone' => 'required|min:10',
-            'mssv' => 'required',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
 
         ]);
-         //Kiem tra tep tin co truong du lieu avatar hay kh
-         if($request->hasFile('avatar')){
-            $file = $request->file('avatar');
-            $extension = $file->getClientOriginalExtension();//Lay ten mo rong .jpg, .png...
-            $filename = time().'.'.$extension;//
-            $file->move('avatar/',$filename) ;  //upload len thu muc avatar trong piblic
-        }
-
         //Lay tat ca co so du lieu gan vao mang data
         $data = $request->all();
 
@@ -81,10 +70,6 @@ class CrudUserController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'phone' => $data['phone'],
-            'mssv' => $data['mssv'],
-            'avatar' => $filename ?? NULL,
-            // 'avatar' => $avatarName ?? NULL,
 
         ]);
 
@@ -150,11 +135,6 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
-            'phone' => 'required|min:10',
-            //'mssv' => 'required',
-            'mssv' =>'required|unique:users',
-
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
 
@@ -163,24 +143,6 @@ class CrudUserController extends Controller
        $user->name = $input['name'];
        $user->email = $input['email'];
        $user->password = $input['password'];
-       $user->phone = $input['phone'];
-       $user->mssv = $input['mssv'];
-          //Kiem tra tep tin co truong du lieu avatar hay kh
-          if($request->hasFile('avatar')){
-
-            //co file dinh kem trong form update thi tim file cu va xoa di
-            //Neu $anhcu ton tai thi xoa no di , neu kh co thi kh xoa
-            $anhcu = 'avatar/' . $user->avatar;
-            if(File::exists($anhcu)){
-                File::delete($anhcu);
-            }
-
-            $file = $request->file('avatar');
-            $extension = $file->getClientOriginalExtension();//Lay ten mo rong .jpg, .png...
-            $filename = time().'.'.$extension;//
-            $file->move('avatar/',$filename) ;  //upload len thu muc avatar trong piblic
-        }
-        $user->avatar = $filename;
         $user->update();
 
         return redirect("list")->withSuccess('You have signed-in');
