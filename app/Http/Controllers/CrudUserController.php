@@ -61,8 +61,8 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'like' => 'require',
-            'github' => 'require',
+            'like' => 'required',
+            'github' => 'required',
 
         ]);
         //Lay tat ca co so du lieu gan vao mang data
@@ -139,8 +139,8 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
-            'like' => 'require',
-            'github' => 'require',
+            'like' => 'required',
+            'github' => 'required',
         ]);
 
 
